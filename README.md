@@ -32,16 +32,20 @@ learn-lang-chain/
 # 激活虚拟环境
 source .venv/bin/activate
 
-# 安装依赖
+# 安装依赖 + 把 learn_lang_chain 安装为 editable 包
+# （editable 安装后，python -m 无需再设 PYTHONPATH）
 pip install -r requirements.txt
+pip install -e .
 
 # 复制环境变量模板并填入真实 key
 cp .env.example .env
 # 编辑 .env，至少设置：
-#   MINIMAX_API_HOST=https://你的-MiniMax-域名
+#   MINIMAX_API_HOST=https://api.minimaxi.com/v1   # 必须带 /v1，由 SDK 自动补 /chat/completions
 #   MINIMAX_API_KEY=你的-key
-#   MINIMAX_MODEL=MiniMax-M3   （可选，默认即为 MiniMax-M3）
+#   MINIMAX_MODEL=MiniMax-M3                       # 可选，默认即为 MiniMax-M3
 ```
+
+`.env` 中的配置会**覆盖**同名的 shell 环境变量（`config.py` 用 `load_dotenv(override=True)`）。如要临时使用 shell 值而非 `.env`，可在命令前加 `MINIMAX_API_HOST=...`。
 
 如果系统中没有 `.venv/`，可用系统 Python：
 
@@ -49,6 +53,7 @@ cp .env.example .env
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install -e .
 ```
 
 ## 3. 运行示例（chapters 目录）
@@ -57,7 +62,6 @@ pip install -r requirements.txt
 
 ```bash
 source .venv/bin/activate
-export PYTHONPATH=src
 
 python -m learn_lang_chain.chapters.ch01_basic_chat       # 基础对话 + 流式
 python -m learn_lang_chain.chapters.ch02_prompt_template  # PromptTemplate + ChatPromptTemplate
@@ -75,9 +79,8 @@ PyCharm 用户也可以直接右键章节文件 → "Run"。
 
 ```bash
 source .venv/bin/activate
-export PYTHONPATH=src
 
-# 跑全部测试
+# 跑全部测试（pyproject.toml 已配置 pythonpath = ["src"]）
 .venv/bin/pytest tests/ -v
 
 # 跑单个章节
@@ -115,8 +118,9 @@ export PYTHONPATH=src
 
 ## 6. 常见问题
 
-- **401 / 403**：检查 `.env` 中 `MINIMAX_API_KEY` 是否正确、是否带多余空格或换行。
+- **404 / 401 / 403**：检查 `.env` 中 `MINIMAX_API_HOST` 是否带 `/v1` 后缀（如 `https://api.minimaxi.com/v1`），`MINIMAX_API_KEY` 是否正确、是否带多余空格或换行。SDK 会自动在 host 后拼 `/chat/completions`，因此 host 不要写完整 endpoint。
 - **超时 / 限流**：示例未内置重试，可在 `get_chat_model()` 返回的实例上自行设置 `max_retries`。
-- **`ModuleNotFoundError: learn_lang_chain`**：忘记 `export PYTHONPATH=src`，或没在项目根目录运行。
+- **`ModuleNotFoundError: learn_lang_chain`**：未执行 `pip install -e .`，或没在项目根目录运行。
 - **`EnvironmentError: MINIMAX_API_KEY 未配置`**：`.env` 不存在或 key 为空；先 `cp .env.example .env` 再填写。
 - **测试导入 `langchain` 失败**：未激活 venv 或未安装依赖；先 `source .venv/bin/activate && pip install -r requirements.txt`。
+- **shell 环境变量优先级问题**：本项目 `load_dotenv(override=True)`，因此 `.env` 优先于同名 shell env。临时想用 shell 值覆盖某项，可以 `MINIMAX_API_KEY=xxx python -m …`。

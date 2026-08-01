@@ -18,5 +18,7 @@ def test_chain_invoke(monkeypatch):
 def test_batch(monkeypatch):
     patch_factory(monkeypatch, ["A", "B", "C"])
     from learn_lang_chain.chapters.ch04_lcel_chain import uppercase_topic
-    out = uppercase_topic.batch(["a", "b", "c"])
+    out = uppercase_topic.batch(
+        ["a", "b", "c"], config={"max_concurrency": 1}
+    )
     assert out == ["A", "B", "C"]
