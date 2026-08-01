@@ -29,6 +29,8 @@ learn-lang-chain/
 ## 2. 环境准备
 
 > 项目根目录已带 PyCharm 创建的 `.venv/`。本项目使用该虚拟环境。
+>
+> **Python 版本要求**：3.10 ≤ Python < 3.14。Python 3.14 上 `langchain==0.3.x` 与 `pydantic>=2` 存在已知 `_eval_type` 兼容问题（ch05 的 `run_agent` 触发），但所有测试仍可正常通过。
 
 ```bash
 # 激活虚拟环境

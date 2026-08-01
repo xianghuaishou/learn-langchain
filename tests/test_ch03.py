@@ -1,3 +1,4 @@
+import pytest
 from langchain_core.language_models.fake_chat_models import FakeListChatModel
 
 
@@ -24,6 +25,3 @@ def test_pydantic_parser(monkeypatch):
     result = analyze("这家店服务超棒！")
     assert result.sentiment == "positive"
     assert result.score == pytest.approx(0.9)
-
-
-import pytest
