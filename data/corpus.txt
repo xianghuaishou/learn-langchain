@@ -1,0 +1,4 @@
+LangChain is a framework for building LLM applications.
+FAISS is a library for efficient similarity search.
+LCEL stands for LangChain Expression Language, using the | operator to compose Runnables.
+AgentExecutor orchestrates tool calls via the ReAct loop.
