@@ -17,11 +17,13 @@ learn-lang-chain/
 │       ├── ch03_output_parser.py
 │       ├── ch04_lcel_chain.py
 │       ├── ch05_tools_agent.py
-│       └── ch06_rag.py
+│       ├── ch06_rag.py
+│       ├── ch07_memory.py
+│       └── ch08_multimodal.py
 └── tests/
     ├── conftest.py
     ├── test_config.py
-    └── test_ch01.py … test_ch06.py
+    └── test_ch01.py … test_ch08.py
 ```
 
 ## 2. 环境准备
@@ -69,6 +71,8 @@ python -m learn_lang_chain.chapters.ch03_output_parser    # StrOutputParser + Py
 python -m learn_lang_chain.chapters.ch04_lcel_chain       # LCEL pipe + RunnableLambda + batch
 python -m learn_lang_chain.chapters.ch05_tools_agent      # @tool + ReAct Agent（AgentExecutor）
 python -m learn_lang_chain.chapters.ch06_rag              # TextLoader + FAISS + Retriever
+python -m learn_lang_chain.chapters.ch07_memory           # RunnableWithMessageHistory 多轮记忆
+python -m learn_lang_chain.chapters.ch08_multimodal       # HumanMessage content list 多模态
 ```
 
 PyCharm 用户也可以直接右键章节文件 → "Run"。
@@ -90,7 +94,7 @@ source .venv/bin/activate
 .venv/bin/pytest tests/test_ch05.py::test_calculator -v
 ```
 
-当前测试矩阵（Task 1-8 完成时）：
+当前测试矩阵：
 
 | 测试文件 | 用例数 |
 | --- | --- |
@@ -101,7 +105,9 @@ source .venv/bin/activate
 | `tests/test_ch04.py` | 2 |
 | `tests/test_ch05.py` | 3 |
 | `tests/test_ch06.py` | 1 |
-| **合计** | **16** |
+| `tests/test_ch07.py` | 2 |
+| `tests/test_ch08.py` | 2 |
+| **合计** | **20** |
 
 ## 5. 学习路线
 
@@ -113,8 +119,8 @@ source .venv/bin/activate
 | ch04 | LCEL | `prompt \| model \| parser`, `RunnableLambda`, `.batch()` |
 | ch05 | 工具与 Agent | `@tool`, `create_react_agent`, `AgentExecutor` |
 | ch06 | RAG | `TextLoader`, `RecursiveCharacterTextSplitter`, `FAISS`, `Retriever` |
-| ch07 | 多轮记忆 | (规划中) `RunnableWithMessageHistory` |
-| ch08 | 多模态 | (规划中) `HumanMessage` content list |
+| ch07 | 多轮记忆 | `RunnableWithMessageHistory`, `ChatMessageHistory` |
+| ch08 | 多模态 | `HumanMessage` content list（含 `image_url`） |
 
 ## 6. 常见问题
 
