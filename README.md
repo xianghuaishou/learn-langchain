@@ -19,11 +19,12 @@ learn-lang-chain/
 │       ├── ch05_tools_agent.py
 │       ├── ch06_rag.py
 │       ├── ch07_memory.py
-│       └── ch08_multimodal.py
+│       ├── ch08_multimodal.py
+│       └── ch09_tracing.py
 └── tests/
     ├── conftest.py
     ├── test_config.py
-    └── test_ch01.py … test_ch08.py
+    └── test_ch01.py … test_ch09.py
 ```
 
 ## 2. 环境准备
@@ -98,6 +99,7 @@ pip install -e .
 .venv/bin/python -m learn_lang_chain.chapters.ch06_rag              # TextLoader + FAISS + Retriever
 .venv/bin/python -m learn_lang_chain.chapters.ch07_memory           # RunnableWithMessageHistory 多轮记忆
 .venv/bin/python -m learn_lang_chain.chapters.ch08_multimodal       # HumanMessage content list 多模态
+.venv/bin/python -m learn_lang_chain.chapters.ch09_tracing          # OpenTelemetry 跟踪 LangChain 调用
 ```
 
 PyCharm 用户也可以直接右键章节文件 → "Run"。
@@ -132,7 +134,8 @@ source .venv/bin/activate
 | `tests/test_ch06.py` | 1 |
 | `tests/test_ch07.py` | 2 |
 | `tests/test_ch08.py` | 2 |
-| **合计** | **20** |
+| `tests/test_ch09.py` | 2 |
+| **合计** | **22** |
 
 ## 5. 学习路线
 
@@ -146,6 +149,7 @@ source .venv/bin/activate
 | ch06 | RAG | `TextLoader`, `RecursiveCharacterTextSplitter`, `FAISS`, `Retriever` |
 | ch07 | 多轮记忆 | `RunnableWithMessageHistory`, `ChatMessageHistory` |
 | ch08 | 多模态 | `HumanMessage` content list（含 `image_url`） |
+| ch09 | OpenTelemetry 跟踪 | `TracerProvider`, `LangchainInstrumentor`, `ConsoleSpanExporter` / `OTLPSpanExporter` |
 
 ## 6. 常见问题
 
