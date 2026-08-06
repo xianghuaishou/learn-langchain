@@ -20,11 +20,12 @@ learn-lang-chain/
 │       ├── ch06_rag.py
 │       ├── ch07_memory.py
 │       ├── ch08_multimodal.py
-│       └── ch09_tracing.py
+│       ├── ch09_tracing.py
+│       └── ch10_langfuse.py
 └── tests/
     ├── conftest.py
     ├── test_config.py
-    └── test_ch01.py … test_ch09.py
+    └── test_ch01.py … test_ch10.py
 ```
 
 ## 2. 环境准备
@@ -66,6 +67,9 @@ cp .env.example .env
 #   MINIMAX_API_HOST=https://api.minimaxi.com/v1   # 必须带 /v1，由 SDK 自动补 /chat/completions
 #   MINIMAX_API_KEY=你的-key
 #   MINIMAX_MODEL=MiniMax-M3                       # 可选，默认即为 MiniMax-M3
+#   LANGFUSE_PUBLIC_KEY=pk-lf-...                   # ch10 需要
+#   LANGFUSE_SECRET_KEY=sk-lf-...                   # ch10 需要
+#   LANGFUSE_BASE_URL=https://cloud.langfuse.com    # 可选，默认 EU region；其他 region: us/jp/hipaa
 ```
 
 `.env` 中的配置会**覆盖**同名的 shell 环境变量（`config.py` 用 `load_dotenv(override=True)`）。如要临时使用 shell 值而非 `.env`，可在命令前加 `MINIMAX_API_HOST=...`。
@@ -100,6 +104,7 @@ pip install -e .
 .venv/bin/python -m learn_lang_chain.chapters.ch07_memory           # RunnableWithMessageHistory 多轮记忆
 .venv/bin/python -m learn_lang_chain.chapters.ch08_multimodal       # HumanMessage content list 多模态
 .venv/bin/python -m learn_lang_chain.chapters.ch09_tracing          # OpenTelemetry 跟踪 LangChain 调用
+.venv/bin/python -m learn_lang_chain.chapters.ch10_langfuse         # Langfuse 跟踪（云端 trace 平台）
 ```
 
 PyCharm 用户也可以直接右键章节文件 → "Run"。
@@ -135,7 +140,8 @@ source .venv/bin/activate
 | `tests/test_ch07.py` | 2 |
 | `tests/test_ch08.py` | 2 |
 | `tests/test_ch09.py` | 2 |
-| **合计** | **22** |
+| `tests/test_ch10.py` | 3 |
+| **合计** | **25** |
 
 ## 5. 学习路线
 
@@ -150,6 +156,7 @@ source .venv/bin/activate
 | ch07 | 多轮记忆 | `RunnableWithMessageHistory`, `ChatMessageHistory` |
 | ch08 | 多模态 | `HumanMessage` content list（含 `image_url`） |
 | ch09 | OpenTelemetry 跟踪 | `TracerProvider`, `LangchainInstrumentor`, `ConsoleSpanExporter` / `OTLPSpanExporter` |
+| ch10 | Langfuse 跟踪 | `Langfuse()`, `CallbackHandler`, `metadata` (user_id / session_id / tags) |
 
 ## 6. 常见问题
 
