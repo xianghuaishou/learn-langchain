@@ -2,6 +2,10 @@
 
 LangChain 入门到进阶示例，统一使用 MiniMax-M3（OpenAI 兼容协议）。
 
+[![tests](https://github.com/<owner>/learn-lang-chain/actions/workflows/test.yml/badge.svg)](https://github.com/<owner>/learn-lang-chain/actions/workflows/test.yml)
+
+> 推送 / PR 时自动跑测试并生成覆盖率报告（见 `.github/workflows/test.yml`）。覆盖率阈值 70%。
+
 ## 1. 项目结构
 
 ```
@@ -119,12 +123,17 @@ source .venv/bin/activate
 # 跑全部测试（pyproject.toml 已配置 pythonpath = ["src"]）
 .venv/bin/pytest tests/ -v
 
+# 带覆盖率报告
+.venv/bin/pytest tests/ --cov=learn_lang_chain --cov-report=term-missing
+
 # 跑单个章节
 .venv/bin/pytest tests/test_ch05.py -v
 
 # 跑单个用例
 .venv/bin/pytest tests/test_ch05.py::test_calculator -v
 ```
+
+CI 上由 GitHub Actions 自动跑 `.github/workflows/test.yml`：推送到 `main` 或 PR 都会触发，输出覆盖率报告并上传 artifact（`coverage-report-python-3.12.xml`）。阈值 70%，低于即 fail。
 
 当前测试矩阵：
 
