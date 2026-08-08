@@ -6,6 +6,8 @@ LangChain 入门到进阶示例，统一使用 MiniMax-M3（OpenAI 兼容协议�
 
 > 推送 / PR 时自动跑测试并生成覆盖率报告（见 `.github/workflows/test.yml`）。覆盖率阈值 70%。
 
+<!-- test PR for dorny/test-reporter -->
+
 ## 1. 项目结构
 
 ```
