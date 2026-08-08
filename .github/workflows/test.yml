@@ -57,7 +57,7 @@ jobs:
 
       - name: Post test results to PR
         if: github.event_name == 'pull_request'
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v3
         with:
           name: pytest (Python ${{ matrix.python-version }})
           path: pytest-junit.xml
