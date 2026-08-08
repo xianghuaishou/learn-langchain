@@ -41,14 +41,19 @@ jobs:
             --junitxml=pytest-junit.xml \
             --cov-fail-under=70
 
-      - name: Upload coverage + junit report
+      - name: Upload coverage report
         if: always()
         uses: actions/upload-artifact@v6.0.0
         with:
           name: coverage-report-${{ matrix.python-version }}
-          path: |
-            coverage.xml
-            pytest-junit.xml
+          path: coverage.xml
+
+      - name: Upload pytest junit report
+        if: always()
+        uses: actions/upload-artifact@v6.0.0
+        with:
+          name: test-report-${{ matrix.python-version }}
+          path: pytest-junit.xml
 
       - name: Upload coverage to Codecov (optional)
         if: always() && env.CODECOV_TOKEN != ''
