@@ -38,26 +38,34 @@ jobs:
             --cov=learn_lang_chain \
             --cov-report=term-missing \
             --cov-report=xml \
+            --junitxml=pytest-junit.xml \
             --cov-fail-under=70
 
-      - name: Upload coverage report
+      - name: Upload coverage + junit report
         if: always()
         uses: actions/upload-artifact@v5
         with:
           name: coverage-report-${{ matrix.python-version }}
-          path: coverage.xml
+          path: |
+            coverage.xml
+            pytest-junit.xml
 
       - name: Upload coverage to Codecov (optional)
         if: always() && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@v6
         with:
-          file: ./coverage.xml
+          files: ./coverage.xml
+          flags: unittests
           fail_ci_if_error: false
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: Upload test results to Codecov
-        if: ${{ !cancelled() }}
-        uses: codecov/test-results-action@v1
+      - name: Upload test results to Codecov (optional)
+        if: always() && env.CODECOV_TOKEN != ''
+        uses: codecov/codecov-action@v6
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
+          report_type: test_results
+          files: ./pytest-junit.xml
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
