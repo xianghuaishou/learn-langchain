@@ -2,7 +2,7 @@
 
 LangChain 入门到进阶示例，统一使用 MiniMax-M3（OpenAI 兼容协议）。
 
-[![tests](https://github.com/xianghuaishou/learn-lang-chain/actions/workflows/test.yml/badge.svg)](https://github.com/xianghuaishou/learn-lang-chain/actions/workflows/test.yml)
+[![tests](https://github.com/xianghuaishou/learn-langchain/actions/workflows/test.yml/badge.svg)](https://github.com/xianghuaishou/learn-langchain/actions/workflows/test.yml)
 
 > 推送 / PR 时自动跑测试并生成覆盖率报告（见 `.github/workflows/test.yml`）。覆盖率阈值 70%。
 
