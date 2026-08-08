@@ -61,7 +61,7 @@ jobs:
         with:
           name: pytest (Python ${{ matrix.python-version }})
           path: pytest-junit.xml
-          reporter: github-pr-check
+          reporter: python-xunit
           fail-on-error: false
 
       - name: Upload coverage to Codecov (optional)
