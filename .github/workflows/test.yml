@@ -55,6 +55,15 @@ jobs:
           name: test-report-${{ matrix.python-version }}
           path: pytest-junit.xml
 
+      - name: Post test results to PR
+        if: github.event_name == 'pull_request'
+        uses: dorny/test-reporter@v1
+        with:
+          name: pytest (Python ${{ matrix.python-version }})
+          path: pytest-junit.xml
+          reporter: github-pr-check
+          fail-on-error: false
+
       - name: Upload coverage to Codecov (optional)
         if: always() && env.CODECOV_TOKEN != ''
         uses: codecov/codecov-action@v6
